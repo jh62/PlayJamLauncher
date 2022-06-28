@@ -4,6 +4,7 @@ const CONFIG_FILENAME := "config.cfg"
 
 enum MENU_STATE {
 	INTRO,
+	PLAYER_NAME,
 	GAME_LIST_EXPAND,
 	GAME_SELECTION,
 	GAME_EXECUTE
@@ -13,10 +14,15 @@ onready var n_ItemList := $SidePanelControl/MarginContainer/ItemList
 onready var n_WarningDialog := $CanvasLayer/PopUpControl/AcceptDialog
 onready var n_AnimationPlayer := $AnimationPlayer
 onready var n_ThumbnailTexture := $GameThumbnail
+onready var n_InputNameLabels := [
+	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput1,
+	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput2,
+	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput3
+]
 
 var config := ConfigFile.new()
 
-var menu_state = MENU_STATE.INTRO setget set_state
+var menu_state = MENU_STATE.PLAYER_NAME setget set_state
 
 func _ready():
 	var _err = config.load(CONFIG_FILENAME)
@@ -96,12 +102,29 @@ func _populate_games(_dir_list : Directory) -> void:
 	n_ItemList.select(0)
 
 var _selected_index := 0
+var _input_name_idx := 0
+var _input_letter := 0
 
 func _input(event : InputEvent):
 	match menu_state:
 		MENU_STATE.INTRO:
 			if Input.is_key_pressed(KEY_ENTER):
 				set_state(MENU_STATE.GAME_LIST_EXPAND)
+		MENU_STATE.PLAYER_NAME:
+			if Input.is_action_just_pressed("ui_left"):
+				n_InputNameLabels[_input_name_idx].deselect()
+				_input_name_idx = wrapi(_input_name_idx - 1, 0, 3)
+				n_InputNameLabels[_input_name_idx].select()
+			elif Input.is_action_just_pressed("ui_right"):
+				n_InputNameLabels[_input_name_idx].deselect()
+				_input_name_idx = wrapi(_input_name_idx + 1, 0, 3)
+				n_InputNameLabels[_input_name_idx].select()
+				
+			if Input.is_action_just_pressed("ui_up"):
+				n_InputNameLabels[_input_name_idx]._scancode += 1
+			elif Input.is_action_just_pressed("ui_down"):
+				n_InputNameLabels[_input_name_idx]._scancode -= 1
+				
 		MENU_STATE.GAME_SELECTION:
 			if n_ItemList.get_item_count() == 0:
 				return
@@ -139,7 +162,8 @@ func set_state(_state : int) -> void:
 				var _game_path = n_ItemList.get_item_metadata(i)
 				var _file = _game_path[Enums.GAME_METADATA.PATH] + "/" + _game_path[Enums.GAME_METADATA.FILENAME]
 				print_debug("Executing: {0}".format({0:_game_path}))
-				OS.execute(_file, [], true)
+				var _exit := OS.execute(_file, [], true)
+				print_debug(_exit)
 			
 			set_state(MENU_STATE.GAME_SELECTION)
 
