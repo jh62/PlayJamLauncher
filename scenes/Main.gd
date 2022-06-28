@@ -10,7 +10,7 @@ enum MENU_STATE {
 }
 
 onready var n_ItemList := $SidePanelControl/MarginContainer/ItemList
-onready var n_WarningDialog := $Control/AcceptDialog
+onready var n_WarningDialog := $CanvasLayer/PopUpControl/AcceptDialog
 onready var n_AnimationPlayer := $AnimationPlayer
 onready var n_ThumbnailTexture := $GameThumbnail
 
@@ -86,10 +86,11 @@ func _populate_games(_dir_list : Directory) -> void:
 		
 		_file = _dir_list.get_next()
 		_item_idx += 1
-	
+			
 	if n_ItemList.get_item_count() == 0:
 		n_WarningDialog.dialog_text = "No se encontraron juegos!"
-		n_WarningDialog.show()
+		n_WarningDialog.visible = true
+		n_WarningDialog.popup_centered()
 		return
 	
 	n_ItemList.select(0)
@@ -102,6 +103,9 @@ func _input(event : InputEvent):
 			if Input.is_key_pressed(KEY_ENTER):
 				set_state(MENU_STATE.GAME_LIST_EXPAND)
 		MENU_STATE.GAME_SELECTION:
+			if n_ItemList.get_item_count() == 0:
+				return
+				
 			if Input.is_action_pressed("ui_up"):
 				_selected_index = max(_selected_index - 1, 0)
 			elif Input.is_action_pressed("ui_down"):

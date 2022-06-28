@@ -68,7 +68,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 600 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Control/AcceptDialog:visible")
+tracks/5/path = NodePath("CanvasLayer/PopUpControl/AcceptDialog:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -170,18 +170,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Control/AcceptDialog:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -248,17 +236,28 @@ text = "PRESS ANY BUTTON TO BEGIN!"
 align = 1
 valign = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "intro"
+anims/RESET = SubResource( 1 )
+anims/game_list_expand = SubResource( 3 )
+anims/intro = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PopUpControl" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="AcceptDialog" type="AcceptDialog" parent="Control"]
+[node name="AcceptDialog" type="AcceptDialog" parent="CanvasLayer/PopUpControl"]
 anchor_left = 0.329102
 anchor_top = 0.34
 anchor_right = 0.670898
 anchor_bottom = 0.66
 margin_bottom = -3.05176e-05
+rect_min_size = Vector2( 350, 192 )
+theme = ExtResource( 2 )
 popup_exclusive = true
 window_title = "Aviso!"
 dialog_text = "Este es un texto de prueba para ver como se ven los dialogos con muchos caracteres. Parece que se ve bien y bonito asi que vamos a dejarlo asi y no tocar nada."
@@ -267,11 +266,5 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "intro"
-anims/RESET = SubResource( 1 )
-anims/game_list_expand = SubResource( 3 )
-anims/intro = SubResource( 2 )
-
 [connection signal="item_selected" from="SidePanelControl/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
-[connection signal="confirmed" from="Control/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
+[connection signal="confirmed" from="CanvasLayer/PopUpControl/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
