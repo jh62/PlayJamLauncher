@@ -80,6 +80,66 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("CanvasLayer/CCPlayerName:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CanvasLayer/PopUpControl:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("PressStartContainer:mouse_filter")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("PlayerDataContainer:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("CanvasLayer/CCPlayerName:mouse_filter")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "game_list_expand"
@@ -131,6 +191,42 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, 600 ), Vector2( 320, 600 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("PlayerDataContainer:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CanvasLayer/CCPlayerName:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CanvasLayer/CCPlayerName:mouse_filter")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "intro"
@@ -166,6 +262,54 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CanvasLayer/CCPlayerName:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CanvasLayer/PopUpControl:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("PressStartContainer:mouse_filter")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("PlayerDataContainer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -217,15 +361,14 @@ custom_constants/margin_bottom = 8
 [node name="ItemList" type="ItemList" parent="SidePanelControl/MarginContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 312.0
-margin_bottom = 1192.0
+margin_right = 8.0
+margin_bottom = 592.0
 same_column_width = true
 
 [node name="PressStartContainer" type="CenterContainer" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 
 [node name="LabelPressStart" type="Label" parent="PressStartContainer"]
 margin_left = 343.0
@@ -237,6 +380,38 @@ text = "PRESS ANY BUTTON TO BEGIN!"
 align = 1
 valign = 1
 
+[node name="PlayerDataContainer" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.875
+anchor_right = 1.0
+anchor_bottom = 0.106667
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LabelPlayerName" type="Label" parent="PlayerDataContainer"]
+margin_top = 13.0
+margin_right = 128.0
+margin_bottom = 30.0
+text = "AAA"
+align = 3
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LabelPlayerLives" type="Label" parent="PlayerDataContainer"]
+margin_top = 34.0
+margin_right = 128.0
+margin_bottom = 51.0
+text = "VIDAS: 0"
+align = 3
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro"
 anims/RESET = SubResource( 1 )
@@ -247,6 +422,7 @@ anims/intro = SubResource( 2 )
 layer = 100
 
 [node name="PopUpControl" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -268,8 +444,10 @@ __meta__ = {
 }
 
 [node name="CCPlayerName" type="CenterContainer" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 2 )
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/CCPlayerName"]

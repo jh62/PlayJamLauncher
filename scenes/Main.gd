@@ -14,15 +14,20 @@ onready var n_ItemList := $SidePanelControl/MarginContainer/ItemList
 onready var n_WarningDialog := $CanvasLayer/PopUpControl/AcceptDialog
 onready var n_AnimationPlayer := $AnimationPlayer
 onready var n_ThumbnailTexture := $GameThumbnail
+onready var n_PressStartContainer := $PressStartContainer
 onready var n_InputNameLabels := [
 	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput1,
 	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput2,
 	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput3
 ]
+onready var n_PlayerNameInput := $CanvasLayer/CCPlayerName
+onready var n_LabelPlayerName := $PlayerDataContainer/LabelPlayerName
+onready var n_LabelPlayerLives := $PlayerDataContainer/LabelPlayerLives
 
 var config := ConfigFile.new()
+var _player_lives := 0
 
-var menu_state = MENU_STATE.PLAYER_NAME setget set_state
+var menu_state = MENU_STATE.INTRO setget set_state
 
 func _ready():
 	var _err = config.load(CONFIG_FILENAME)
@@ -109,7 +114,7 @@ func _input(event : InputEvent):
 	match menu_state:
 		MENU_STATE.INTRO:
 			if Input.is_key_pressed(KEY_ENTER):
-				set_state(MENU_STATE.GAME_LIST_EXPAND)
+				set_state(MENU_STATE.PLAYER_NAME)
 		MENU_STATE.PLAYER_NAME:
 			if Input.is_action_just_pressed("ui_left"):
 				n_InputNameLabels[_input_name_idx].deselect()
@@ -125,6 +130,8 @@ func _input(event : InputEvent):
 			elif Input.is_action_just_pressed("ui_down"):
 				n_InputNameLabels[_input_name_idx]._scancode -= 1
 				
+			if Input.is_action_just_pressed("ui_accept"):
+				set_state(MENU_STATE.GAME_LIST_EXPAND)				
 		MENU_STATE.GAME_SELECTION:
 			if n_ItemList.get_item_count() == 0:
 				return
@@ -134,6 +141,10 @@ func _input(event : InputEvent):
 			elif Input.is_action_pressed("ui_down"):
 				_selected_index = min(_selected_index + 1, n_ItemList.get_item_count() - 1)				
 			
+			if Input.is_action_pressed("ui_cancel"):
+				set_state(MENU_STATE.PLAYER_NAME)
+				return
+				
 			n_ItemList.select(_selected_index)
 			
 			var _meta = n_ItemList.get_item_metadata(_selected_index)
@@ -153,7 +164,13 @@ func set_state(_state : int) -> void:
 	match _state:
 		MENU_STATE.INTRO:
 			pass
+		MENU_STATE.PLAYER_NAME:
+			n_PressStartContainer.visible = false
+			n_AnimationPlayer.stop()
+			n_PlayerNameInput.visible = true
 		MENU_STATE.GAME_LIST_EXPAND:
+			n_LabelPlayerName.text = n_InputNameLabels[0].get_text() + n_InputNameLabels[1].get_text() + n_InputNameLabels[2].get_text() 
+			n_LabelPlayerLives.text = String(_player_lives)
 			n_AnimationPlayer.play("game_list_expand")
 			set_state(MENU_STATE.GAME_SELECTION)
 			n_ItemList.grab_focus()
