@@ -4,7 +4,7 @@ onready var n_Label := $Label
 onready var n_LabelUnderscore := $LabelUnderscore
 onready var n_Tween := $Tween
 
-var _scancode := Enums.MIN_CHAR_SCANCODE setget set_scancode
+var _scancode := Global.MIN_CHAR_SCANCODE setget set_scancode
 
 func get_text() -> String:
 	return n_Label.text
@@ -20,7 +20,7 @@ func set_letter(_letter : int) -> void:
 	n_Label.text = OS.get_scancode_string(_letter)
 	
 func set_scancode(_val) -> void:
-	_scancode = wrapi(_val, Enums.MIN_CHAR_SCANCODE, Enums.MAX_CHAR_SCANCODE)
+	_scancode = wrapi(_val, Global.MIN_CHAR_SCANCODE, Global.MAX_CHAR_SCANCODE)
 	set_letter(_scancode)
 
 func _fade_out() -> void:

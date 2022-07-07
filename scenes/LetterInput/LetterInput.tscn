@@ -13,17 +13,16 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_top = 13.0
-margin_right = 52.0
-margin_bottom = 27.0
+margin_right = 24.0
+margin_bottom = 14.0
 text = "a"
 align = 1
 valign = 1
 
 [node name="LabelUnderscore" type="Label" parent="."]
-margin_top = 31.0
-margin_right = 52.0
-margin_bottom = 45.0
+margin_top = 18.0
+margin_right = 24.0
+margin_bottom = 32.0
 text = "_"
 align = 1
 valign = 1

@@ -1,15 +1,15 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/playjam_logo.png" type="Texture" id=1]
+[ext_resource path="res://assets/playjam_logo_v2.jpg" type="Texture" id=1]
 [ext_resource path="res://assets/res/global_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/Main.gd" type="Script" id=3]
 [ext_resource path="res://assets/res/fonts/font_title_48px.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/LetterInput/LetterInput.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("PressStartContainer/LabelPressStart:modulate")
+tracks/0/path = NodePath("MarginContainer:rect_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,127 +18,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("PressStartContainer:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SidePanelControl:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("SidePanelControl:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("SidePanelControl:rect_size")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 600 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("CanvasLayer/PopUpControl/AcceptDialog:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("CanvasLayer/CCPlayerName:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("CanvasLayer/PopUpControl:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("PressStartContainer:mouse_filter")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("PlayerDataContainer:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("CanvasLayer/CCPlayerName:mouse_filter")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 2 ]
+"values": [ Vector2( 152, 270 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -156,19 +36,19 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("SidePanelControl:modulate")
+tracks/1/path = NodePath("PlayerDataContainer/VBoxContainer:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("SidePanelControl:visible")
+tracks/2/path = NodePath("CanvasLayer/CCPlayerName:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -177,46 +57,46 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SidePanelControl:rect_size")
+tracks/3/path = NodePath("CanvasLayer/CCPlayerName:mouse_filter")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 600 ), Vector2( 320, 600 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("PlayerDataContainer:visible")
+tracks/4/path = NodePath("MarginContainer:rect_size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 270 ), Vector2( 152, 270 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("CanvasLayer/CCPlayerName:visible")
+tracks/5/path = NodePath("MarginContainer/SidePanelControl:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.784314 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("CanvasLayer/CCPlayerName:mouse_filter")
+tracks/6/path = NodePath("MarginContainer/SidePanelControl:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -225,7 +105,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -256,7 +136,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("SidePanelControl:visible")
+tracks/2/path = NodePath("MarginContainer/SidePanelControl:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -304,7 +184,7 @@ tracks/5/keys = {
 "values": [ 0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("PlayerDataContainer:visible")
+tracks/6/path = NodePath("PlayerDataContainer/VBoxContainer:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -329,13 +209,22 @@ anchor_bottom = 1.0
 mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
-stretch_mode = 7
+stretch_mode = 6
+
+[node name="BackgroundColor" type="ColorRect" parent="BackgroundTexture"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.027451, 0.0117647, 0.14902, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="GameThumbnail" type="TextureRect" parent="."]
-anchor_left = 0.4375
-anchor_top = 0.106667
-anchor_right = 0.9375
-anchor_bottom = 0.853333
+anchor_left = 0.416667
+anchor_top = 0.207407
+anchor_right = 0.916667
+anchor_bottom = 0.954073
 mouse_filter = 2
 expand = true
 stretch_mode = 5
@@ -343,26 +232,30 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="SidePanelControl" type="Panel" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
-anchor_right = 0.3125
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 0.316667
 anchor_bottom = 1.0
-margin_right = -320.0
+margin_right = -0.000167847
+custom_constants/margin_right = 0
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
-[node name="MarginContainer" type="MarginContainer" parent="SidePanelControl"]
+[node name="SidePanelControl" type="Panel" parent="MarginContainer"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 152.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/SidePanelControl"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
 
-[node name="ItemList" type="ItemList" parent="SidePanelControl/MarginContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 8.0
-margin_bottom = 592.0
+[node name="ItemList" type="ItemList" parent="MarginContainer/SidePanelControl/MarginContainer"]
+margin_right = 152.0
+margin_bottom = 270.0
 same_column_width = true
 
 [node name="PressStartContainer" type="CenterContainer" parent="."]
@@ -371,29 +264,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="LabelPressStart" type="Label" parent="PressStartContainer"]
-margin_left = 343.0
-margin_top = 291.0
-margin_right = 681.0
-margin_bottom = 308.0
+margin_left = 71.0
+margin_top = 126.0
+margin_right = 409.0
+margin_bottom = 143.0
 custom_fonts/font = ExtResource( 4 )
 text = "PRESS ANY BUTTON TO BEGIN!"
 align = 1
 valign = 1
 
-[node name="PlayerDataContainer" type="VBoxContainer" parent="."]
-visible = false
-anchor_left = 0.875
+[node name="PlayerDataContainer" type="MarginContainer" parent="."]
+anchor_left = 0.8
 anchor_right = 1.0
-anchor_bottom = 0.106667
+anchor_bottom = 0.237037
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerDataContainer"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 94.0
+margin_bottom = 62.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="LabelPlayerName" type="Label" parent="PlayerDataContainer"]
-margin_top = 13.0
-margin_right = 128.0
-margin_bottom = 30.0
+[node name="LabelPlayerName" type="Label" parent="PlayerDataContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 88.0
+margin_bottom = 28.0
 text = "AAA"
 align = 3
 valign = 1
@@ -401,10 +306,10 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="LabelPlayerLives" type="Label" parent="PlayerDataContainer"]
-margin_top = 34.0
-margin_right = 128.0
-margin_bottom = 51.0
+[node name="LabelPlayerLives" type="Label" parent="PlayerDataContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 88.0
+margin_bottom = 42.0
 text = "VIDAS: 0"
 align = 3
 valign = 1
@@ -414,7 +319,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro"
-anims/RESET = SubResource( 1 )
+anims/RESET = SubResource( 4 )
 anims/game_list_expand = SubResource( 3 )
 anims/intro = SubResource( 2 )
 
@@ -451,10 +356,10 @@ mouse_filter = 2
 theme = ExtResource( 2 )
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/CCPlayerName"]
-margin_left = 408.0
-margin_top = 270.0
-margin_right = 616.0
-margin_bottom = 329.0
+margin_left = 184.0
+margin_top = 116.0
+margin_right = 296.0
+margin_bottom = 154.0
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/CCPlayerName/VBox"]
@@ -469,9 +374,10 @@ margin_right = 208.0
 margin_bottom = 59.0
 
 [node name="GC" type="GridContainer" parent="CanvasLayer/CCPlayerName/VBox/CC"]
-margin_left = 80.0
-margin_right = 127.0
-margin_bottom = 38.0
+margin_left = 89.0
+margin_top = 7.0
+margin_right = 118.0
+margin_bottom = 31.0
 columns = 3
 
 [node name="LetterInput1" parent="CanvasLayer/CCPlayerName/VBox/CC/GC" instance=ExtResource( 5 )]
@@ -494,5 +400,5 @@ margin_left = 34.0
 margin_right = 47.0
 margin_bottom = 38.0
 
-[connection signal="item_selected" from="SidePanelControl/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="item_selected" from="MarginContainer/SidePanelControl/MarginContainer/ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="confirmed" from="CanvasLayer/PopUpControl/AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]

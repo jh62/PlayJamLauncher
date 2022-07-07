@@ -1,0 +1,25 @@
+class_name Global extends Node
+
+const MIN_CHAR_SCANCODE := 65
+const MAX_CHAR_SCANCODE := 91
+
+const MAX_PLAYER_LIVES := 3
+
+enum PLAY_MODE {
+	SEAMLESS,
+	SINGLE,
+	RANDOM
+}
+
+enum GAME_METADATA {
+	PATH,
+	FILENAME
+}
+
+enum MENU_STATE {
+	INTRO,
+	INPUT_NAME,
+	GAME_LIST_EXPAND,
+	GAME_SELECTION,
+	GAME_EXECUTE
+}

@@ -1,0 +1,21 @@
+class_name MenuState
+
+var owner
+
+func _init(_owner):
+	owner = _owner
+
+func get_type() -> int:
+	return -1
+
+func enter_state(args = null) -> void:
+	pass
+
+func exit_state() -> void:
+	pass
+	
+func input(event : InputEvent) -> void:
+	pass
+
+func process(delta) -> void:
+	pass
