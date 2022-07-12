@@ -27,7 +27,7 @@ onready var MenuStates := {
 onready var current_state = MenuStates.get(Global.MENU_STATE.INTRO)
 
 var config := ConfigFile.new()
-var player_lives := 0
+var player_lives := 3 setget set_player_lives
 
 func _ready():
 	var _err = config.load(CONFIG_FILENAME)
@@ -129,6 +129,7 @@ func _on_ItemList_item_selected(index):
 	pass
 	
 func set_player_lives(_value) -> void:
+	print_debug("set")
 	player_lives = clamp(_value, 0, Global.MAX_PLAYER_LIVES)
 	update_player_lives()
 	

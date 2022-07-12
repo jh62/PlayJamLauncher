@@ -1,9 +1,9 @@
 extends MenuState
 
 enum EXIT_CODES {
-	WIN = 0,
-	LOSE = 1,
-	QUIT = 2
+	WIN = 1,
+	LOSE = 2,
+	QUIT = 0
 }
 
 var _item_list : ItemList
@@ -36,5 +36,5 @@ func process(delta) -> void:
 		EXIT_CODES.QUIT:
 			owner.set_state(Globals.MENU_STATE.GAME_SELECTION)
 			return
-			
+		
 	_index = wrapi(_index + 1, 0, _item_list.get_item_count())
