@@ -8,7 +8,7 @@ func _init(_owner):
 func get_type() -> int:
 	return -1
 
-func enter_state(args = null) -> void:
+func enter_state(meta := {}) -> void:
 	pass
 
 func exit_state() -> void:

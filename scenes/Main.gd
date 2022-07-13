@@ -3,18 +3,18 @@ class_name Main extends Control
 const CONFIG_FILENAME := "config.cfg"
 
 onready var n_ItemList := $MarginContainer/SidePanelControl/MarginContainer/ItemList
-onready var n_WarningDialog := $CanvasLayer/PopUpControl/AcceptDialog
 onready var n_AnimationPlayer := $AnimationPlayer
 onready var n_ThumbnailTexture := $GameThumbnail
 onready var n_PressStartContainer := $PressStartContainer
-onready var n_InputNameLabels := [
-	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput1,
-	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput2,
-	$CanvasLayer/CCPlayerName/VBox/CC/GC/LetterInput3
-]
-onready var n_PlayerNameInput := $CanvasLayer/CCPlayerName
 onready var n_LabelPlayerName := $PlayerDataContainer/VBoxContainer/LabelPlayerName
 onready var n_LabelPlayerLives := $PlayerDataContainer/VBoxContainer/LabelPlayerLives
+onready var n_InputNameLabels := [
+	$CanvasLayer/Control/CCPlayerName/VBox/CC/GC/LetterInput1,
+	$CanvasLayer/Control/CCPlayerName/VBox/CC/GC/LetterInput2,
+	$CanvasLayer/Control/CCPlayerName/VBox/CC/GC/LetterInput3
+]
+onready var n_WarningDialog := $CanvasLayer/Control/PopUpControl/AcceptDialog
+onready var n_PlayerNameInput := $CanvasLayer/Control/CCPlayerName
 
 onready var MenuStates := {
 	Global.MENU_STATE.INTRO: preload("res://scripts/menu_states/IntroState.gd").new(self),
@@ -115,7 +115,7 @@ func _process(delta):
 func _input(event : InputEvent):
 	current_state.input(event)
 
-func set_state(_new_state : int, args = null) -> void:
+func set_state(_new_state : int, args := {}) -> void:
 	if current_state != null:
 		current_state.exit_state()
 	
@@ -129,12 +129,16 @@ func _on_ItemList_item_selected(index):
 	pass
 	
 func set_player_lives(_value) -> void:
-	print_debug("set")
 	player_lives = clamp(_value, 0, Global.MAX_PLAYER_LIVES)
 	update_player_lives()
+	
+func set_player_score(_new_score) -> void:
+	pass
 	
 func update_player_lives() -> void:
 	n_LabelPlayerLives.text = "VIDAS: {0}".format({0:String(player_lives)})
 
 func update_player_name() -> void:
-	n_InputNameLabels[0].get_text() + n_InputNameLabels[1].get_text() + n_InputNameLabels[2].get_text()
+	var _name = n_InputNameLabels[0].get_text() + n_InputNameLabels[1].get_text() + n_InputNameLabels[2].get_text()
+	n_LabelPlayerName.text = _name
+	

@@ -5,6 +5,11 @@ const MAX_CHAR_SCANCODE := 91
 
 const MAX_PLAYER_LIVES := 3
 
+enum METADATA {
+	PLAYER_ID,
+	GAME_INDEX
+}
+
 enum PLAY_MODE {
 	SEAMLESS,
 	SINGLE,

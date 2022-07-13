@@ -10,7 +10,7 @@ func _init(_owner).(_owner):
 func get_type() -> int:
 	return Globals.MENU_STATE.GAME_SELECTION
 
-func enter_state(args = null) -> void:
+func enter_state(meta := {}) -> void:
 	_item_list = owner.n_ItemList
 	_thumbnail = owner.n_ThumbnailTexture
 	
@@ -22,7 +22,9 @@ func input(event) -> void:
 		return
 		
 	if Input.is_action_just_pressed("ui_accept") || (event is InputEventMouseButton && event.doubleclick):
-		owner.set_state(Globals.MENU_STATE.GAME_EXECUTE, _selected_index)
+		owner.set_state(Globals.MENU_STATE.GAME_EXECUTE, {
+			Globals.METADATA.GAME_INDEX: _selected_index
+		})
 		return
 	
 	if Input.is_action_pressed("ui_cancel"):

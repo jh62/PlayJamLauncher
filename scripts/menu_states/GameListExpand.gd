@@ -6,12 +6,12 @@ func _init(_owner).(_owner):
 func get_type() -> int:
 	return Globals.MENU_STATE.GAME_LIST_EXPAND
 
-func enter_state(args = null) -> void:
+func enter_state(meta := {}) -> void:
 	owner.n_AnimationPlayer.connect("animation_finished", self, "_animation_finished")
 	
+	owner.n_AnimationPlayer.play("game_list_expand")
 	owner.update_player_name()
 	owner.update_player_lives()
-	owner.n_AnimationPlayer.play("game_list_expand")
 
 func input(event) -> void:
 	pass

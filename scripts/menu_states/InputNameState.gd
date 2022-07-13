@@ -10,7 +10,7 @@ func _init(_owner).(_owner):
 func get_type() -> int:
 	return Globals.MENU_STATE.INPUT_NAME
 
-func enter_state(args = null) -> void:
+func enter_state(meta := {}) -> void:
 	owner.n_PressStartContainer.visible = false
 	owner.n_AnimationPlayer.stop()
 	owner.n_PlayerNameInput.visible = true
