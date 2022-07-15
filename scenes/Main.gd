@@ -1,20 +1,25 @@
 class_name Main extends Control
 
-const CONFIG_FILENAME := "config.cfg"
-
-onready var n_ItemList := $MarginContainer/SidePanelControl/MarginContainer/ItemList
 onready var n_AnimationPlayer := $AnimationPlayer
+
+onready var n_SidePanel := $MarginContainer/SidePanelControl
+onready var n_ItemList := $MarginContainer/SidePanelControl/MarginContainer/ItemList
 onready var n_ThumbnailTexture := $GameThumbnail
+
 onready var n_PressStartContainer := $PressStartContainer
+
 onready var n_LabelPlayerName := $PlayerDataContainer/VBoxContainer/LabelPlayerName
 onready var n_LabelPlayerLives := $PlayerDataContainer/VBoxContainer/LabelPlayerLives
+
+onready var n_PlayerNameInput := $CanvasLayer/Control/CCPlayerName
 onready var n_InputNameLabels := [
 	$CanvasLayer/Control/CCPlayerName/VBox/CC/GC/LetterInput1,
 	$CanvasLayer/Control/CCPlayerName/VBox/CC/GC/LetterInput2,
 	$CanvasLayer/Control/CCPlayerName/VBox/CC/GC/LetterInput3
 ]
+
 onready var n_WarningDialog := $CanvasLayer/Control/PopUpControl/AcceptDialog
-onready var n_PlayerNameInput := $CanvasLayer/Control/CCPlayerName
+onready var n_PlayerScoresList := $CanvasLayer/Control/ScoreBoardContainer/VBoxContainer2/VScrollBar/VBoxPlayerScore
 
 onready var MenuStates := {
 	Global.MENU_STATE.INTRO: preload("res://scripts/menu_states/IntroState.gd").new(self),
@@ -27,17 +32,24 @@ onready var MenuStates := {
 onready var current_state = MenuStates.get(Global.MENU_STATE.INTRO)
 
 var config := ConfigFile.new()
-var player_lives := 3 setget set_player_lives
 
 func _ready():
-	var _err = config.load(CONFIG_FILENAME)
+	var _err = config.load(Globals.CONFIG_FILENAME)
 	
 	if _err != OK:
-		config.set_value("PlayMode", "play_mode", Global.PLAY_MODE.SEAMLESS)
+		config.set_value("Globals", "play_mode", Globals.play_mode)
+		config.set_value("Globals", "player_lives", Globals.max_player_lives)
 		save_settings()
+	else:
+		Globals.play_mode = config.get_value("Globals","play_mode")
+		Globals.max_player_lives = config.get_value("Globals","player_lives")
+		print_debug("config loaded!")
 		
 	var _dir_list := _create_game_dir()
 	_populate_games(_dir_list)
+	
+	Globals.connect("update_player_scores", self, "_on_update_player_scores")
+	Globals.connect("player_lost_life", self, "_on_player_lost_life")
 
 func save_settings() -> void:
 	config.save("config.cfg")
@@ -49,6 +61,7 @@ func _create_game_dir() -> Directory:
 		_path = OS.get_executable_path().get_base_dir() + "/.games"
 		print_debug("RELEASE MODE")
 	else:
+		Globals.debug_mode = true
 		_path = OS.get_executable_path().get_base_dir() + "/PlayJamLauncher/.games" # test path
 		print_debug("DEBUG MODE")
 		
@@ -128,17 +141,40 @@ func _on_AcceptDialog_confirmed():
 func _on_ItemList_item_selected(index):
 	pass
 	
+func add_new_player(_player) -> void:
+	Globals.current_player = _player
+	n_PlayerScoresList.add_child(_player)
+	_sort_scores()
+	
 func set_player_lives(_value) -> void:
-	player_lives = clamp(_value, 0, Global.MAX_PLAYER_LIVES)
+	Globals.current_player_lives = clamp(_value, 0, Global.max_player_lives)
 	update_player_lives()
-	
-func set_player_score(_new_score) -> void:
-	pass
-	
+
 func update_player_lives() -> void:
-	n_LabelPlayerLives.text = "VIDAS: {0}".format({0:String(player_lives)})
+	n_LabelPlayerLives.text = "VIDAS: {0}".format({0:String(Globals.current_player_lives)})
 
 func update_player_name() -> void:
-	var _name = n_InputNameLabels[0].get_text() + n_InputNameLabels[1].get_text() + n_InputNameLabels[2].get_text()
-	n_LabelPlayerName.text = _name
+	n_LabelPlayerName.text = Globals.current_player.get_name()
 	
+func _on_update_player_scores(score) -> void:
+	var _player_score = n_PlayerScoresList.get_child(Globals.current_player_id)
+	_player_score.set_name(n_LabelPlayerName.text)
+	_player_score.record += score
+
+func _on_player_lost_life() -> void:
+	Globals.current_player_lives -= 1
+	
+	if Globals.current_player_lives == 0:
+		_sort_scores()
+		set_state(Globals.MENU_STATE.INPUT_NAME)
+
+func _sort_scores() -> void:
+	var _children = n_PlayerScoresList.get_children()
+	
+	for i in n_PlayerScoresList.get_children():
+		n_PlayerScoresList.remove_child(i)
+	
+	_children.sort_custom(Globals.ScoreSorter,"sort_ascending")
+	
+	for i in _children:
+		n_PlayerScoresList.add_child(i)

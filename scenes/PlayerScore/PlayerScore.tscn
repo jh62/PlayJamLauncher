@@ -3,24 +3,29 @@
 [ext_resource path="res://scenes/PlayerScore/PlayerScore.gd" type="Script" id=1]
 
 [node name="PlayerScore" type="GridContainer"]
-margin_top = 66.0
-margin_right = 152.0
-margin_bottom = 76.0
+anchor_top = 0.244444
+anchor_right = 0.316667
+anchor_bottom = 0.296296
+margin_bottom = -4.0
 columns = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="LabelName" type="Label" parent="."]
-margin_right = 27.0
+margin_right = 74.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
 text = "AAA"
 align = 1
 valign = 1
 
-[node name="LabelTime" type="Label" parent="."]
-margin_left = 63.0
-margin_right = 119.0
+[node name="LabelRecord" type="Label" parent="."]
+margin_left = 78.0
+margin_right = 152.0
 margin_bottom = 14.0
-size_flags_horizontal = 6
-text = "00:00:00"
+size_flags_horizontal = 3
+text = "0"
 align = 1
 valign = 1

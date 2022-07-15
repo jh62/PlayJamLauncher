@@ -13,9 +13,11 @@ func get_type() -> int:
 func enter_state(meta := {}) -> void:
 	_item_list = owner.n_ItemList
 	_thumbnail = owner.n_ThumbnailTexture
+	_selected_index = 0
+	print_debug("entered")
 	
 func input(event) -> void: 
-	if !(event is InputEventMouseButton || event is InputEventKey):
+	if !(event is InputEventMouseButton) && !(event is InputEventKey):
 		return
 		
 	if _item_list.get_item_count() == 0:

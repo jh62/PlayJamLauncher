@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "MenuState",
 "language": "GDScript",
 "path": "res://scripts/menu_states/MenuState.gd"
+}, {
+"base": "GridContainer",
+"class": "PlayerScore",
+"language": "GDScript",
+"path": "res://scenes/PlayerScore/PlayerScore.gd"
 } ]
 _global_script_class_icons={
 "Global": "",
 "Main": "",
-"MenuState": ""
+"MenuState": "",
+"PlayerScore": ""
 }
 
 [application]

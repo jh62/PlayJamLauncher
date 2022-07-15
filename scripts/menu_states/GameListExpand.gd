@@ -13,6 +13,9 @@ func enter_state(meta := {}) -> void:
 	owner.update_player_name()
 	owner.update_player_lives()
 
+func exit_state() -> void:
+	owner.n_AnimationPlayer.disconnect("animation_finished", self, "_animation_finished")
+
 func input(event) -> void:
 	pass
 

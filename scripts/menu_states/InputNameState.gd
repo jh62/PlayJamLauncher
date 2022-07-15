@@ -11,11 +11,20 @@ func get_type() -> int:
 	return Globals.MENU_STATE.INPUT_NAME
 
 func enter_state(meta := {}) -> void:
-	owner.n_PressStartContainer.visible = false
-	owner.n_AnimationPlayer.stop()
-	owner.n_PlayerNameInput.visible = true
+	_selected_index = 0
+	_input_name_idx = 0
+	_input_letter = 0
+	
+	owner.n_AnimationPlayer.play("input_name")
 
-func input(event) -> void:
+func exit_state() -> void:
+	var _new_player = preload("res://scenes/PlayerScore/PlayerScore.tscn").instance()
+	var _name = owner.n_InputNameLabels[0].get_text() + owner.n_InputNameLabels[1].get_text() + owner.n_InputNameLabels[2].get_text()
+	
+	_new_player.set_name(_name)
+	owner.add_new_player(_new_player)
+
+func input(event) -> void:	
 	if Input.is_action_just_pressed("ui_left"):
 		owner.n_InputNameLabels[_input_name_idx].deselect()
 		_input_name_idx = wrapi(_input_name_idx - 1, 0, 3)
