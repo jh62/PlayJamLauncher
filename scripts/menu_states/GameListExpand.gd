@@ -10,8 +10,7 @@ func enter_state(meta := {}) -> void:
 	owner.n_AnimationPlayer.connect("animation_finished", self, "_animation_finished")
 	
 	owner.n_AnimationPlayer.play("game_list_expand")
-	owner.update_player_name()
-	owner.update_player_lives()
+	owner.update_player_info()
 
 func exit_state() -> void:
 	owner.n_AnimationPlayer.disconnect("animation_finished", self, "_animation_finished")

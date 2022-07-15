@@ -37,12 +37,10 @@ func _ready():
 	var _err = config.load(Globals.CONFIG_FILENAME)
 	
 	if _err != OK:
-		config.set_value("Globals", "play_mode", Globals.play_mode)
-		config.set_value("Globals", "player_lives", Globals.max_player_lives)
 		save_settings()
 	else:
 		Globals.play_mode = config.get_value("Globals","play_mode")
-		Globals.max_player_lives = config.get_value("Globals","player_lives")
+		Globals.max_player_lives = config.get_value("Globals","player_lives")			
 		print_debug("config loaded!")
 		
 	var _dir_list := _create_game_dir()
@@ -52,6 +50,8 @@ func _ready():
 	Globals.connect("player_lost_life", self, "_on_player_lost_life")
 
 func save_settings() -> void:
+	config.set_value("Globals", "play_mode", Globals.play_mode)
+	config.set_value("Globals", "player_lives", Globals.max_player_lives)
 	config.save("config.cfg")
 	
 func _create_game_dir() -> Directory:
@@ -147,26 +147,19 @@ func add_new_player(_player) -> void:
 	_sort_scores()
 	
 func set_player_lives(_value) -> void:
-	Globals.current_player_lives = clamp(_value, 0, Global.max_player_lives)
-	update_player_lives()
+	Globals.current_player.lives = _value
+	update_player_info()
 
-func update_player_lives() -> void:
-	n_LabelPlayerLives.text = "VIDAS: {0}".format({0:String(Globals.current_player_lives)})
-
-func update_player_name() -> void:
+func update_player_info() -> void:
 	n_LabelPlayerName.text = Globals.current_player.get_name()
+	n_LabelPlayerLives.text = "VIDAS: {0}".format({0:String(Globals.current_player.lives)})
 	
 func _on_update_player_scores(score) -> void:
-	var _player_score = n_PlayerScoresList.get_child(Globals.current_player_id)
-	_player_score.set_name(n_LabelPlayerName.text)
-	_player_score.record += score
+	Globals.current_player.record += score
 
 func _on_player_lost_life() -> void:
-	Globals.current_player_lives -= 1
-	
-	if Globals.current_player_lives == 0:
-		_sort_scores()
-		set_state(Globals.MENU_STATE.INPUT_NAME)
+	Globals.current_player.lives -= 1
+	update_player_info()
 
 func _sort_scores() -> void:
 	var _children = n_PlayerScoresList.get_children()
@@ -178,3 +171,8 @@ func _sort_scores() -> void:
 	
 	for i in _children:
 		n_PlayerScoresList.add_child(i)
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		save_settings()
+		get_tree().quit()

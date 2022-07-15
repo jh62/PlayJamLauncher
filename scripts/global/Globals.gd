@@ -16,10 +16,6 @@ var play_mode = PLAY_MODE.SEAMLESS
 
 var current_player : PlayerScore
 
-var current_player_id := 0
-var current_player_name := "AAA"
-var current_player_lives := max_player_lives setget set_player_lives
-
 enum METADATA {
 	PLAYER_ID,
 	GAME_INDEX
@@ -49,6 +45,3 @@ class ScoreSorter:
 		if a.record > b.record:
 			return true
 		return false
-
-func set_player_lives(_val) -> void:
-	current_player_lives = clamp(_val, 0, max_player_lives)

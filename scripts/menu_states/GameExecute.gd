@@ -31,26 +31,36 @@ func process(delta) -> void:
 	var _exit_code
 	
 	if Globals.debug_mode:
-		_exit_code = EXIT_CODES.LOSE
+#		_exit_code = EXIT_CODES.LOSE
+		_exit_code = OS.execute(_file, [], true)
 		print_debug("exit code: " + str(_exit_code))
 	else:
 		_exit_code = OS.execute(_file, [], true)
 		
-	yield(owner.get_tree().create_timer(randf()),"timeout")
-		
-	var score_end := OS.get_ticks_msec() - score_start
+	var score_end := (OS.get_ticks_msec() - score_start) / 1000
 		
 	match _exit_code:
 		EXIT_CODES.WIN:
 			score_end *= 1.25
 		EXIT_CODES.LOSE:
 			Globals.emit_signal("player_lost_life")
+			
+			if Globals.current_player.lives == 0:
+				owner.set_state(Globals.MENU_STATE.INPUT_NAME)
+				return
 		EXIT_CODES.QUIT:
 			owner.set_state(Globals.MENU_STATE.GAME_SELECTION)
 			print_debug("El juego fue cancelado.")
 			return
 		
-	_index = wrapi(_index + 1, 0, _item_list.get_item_count())
-	
 	Globals.emit_signal("update_player_scores", score_end)
+	
+	match Globals.play_mode:
+		Globals.PLAY_MODE.SINGLE:
+			owner.set_state(Globals.MENU_STATE.GAME_SELECTION)
+		Globals.PLAY_MODE.RANDOM:
+			_index = randi() % _item_list.get_item_count()
+		_:
+			_index = wrapi(_index + 1, 0, _item_list.get_item_count())
+	
 	

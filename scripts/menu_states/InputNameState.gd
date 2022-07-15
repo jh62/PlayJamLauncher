@@ -16,12 +16,14 @@ func enter_state(meta := {}) -> void:
 	_input_letter = 0
 	
 	owner.n_AnimationPlayer.play("input_name")
+	print_debug("name")
 
 func exit_state() -> void:
 	var _new_player = preload("res://scenes/PlayerScore/PlayerScore.tscn").instance()
 	var _name = owner.n_InputNameLabels[0].get_text() + owner.n_InputNameLabels[1].get_text() + owner.n_InputNameLabels[2].get_text()
 	
 	_new_player.set_name(_name)
+	_new_player.lives = Globals.max_player_lives
 	owner.add_new_player(_new_player)
 
 func input(event) -> void:	

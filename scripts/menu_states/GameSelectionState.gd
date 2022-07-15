@@ -14,7 +14,8 @@ func enter_state(meta := {}) -> void:
 	_item_list = owner.n_ItemList
 	_thumbnail = owner.n_ThumbnailTexture
 	_selected_index = 0
-	print_debug("entered")
+	
+	owner._sort_scores()
 	
 func input(event) -> void: 
 	if !(event is InputEventMouseButton) && !(event is InputEventKey):
