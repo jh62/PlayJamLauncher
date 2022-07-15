@@ -700,7 +700,6 @@ scroll_horizontal_enabled = false
 
 [node name="VBoxPlayerScore" type="VBoxContainer" parent="CanvasLayer/Control/ScoreBoardContainer/VBoxContainer2/VScrollBar"]
 margin_right = 159.0
-margin_bottom = 10.0
 size_flags_horizontal = 3
 custom_constants/separation = 1
 

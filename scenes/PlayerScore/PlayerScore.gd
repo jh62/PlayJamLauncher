@@ -1,5 +1,6 @@
 class_name PlayerScore extends GridContainer
 
+var lives := 0 setget set_lives
 var record := 0 setget set_record
 
 func get_player_id() -> int:
@@ -17,3 +18,6 @@ func set_name(_name : String) -> void:
 func set_record(_value) -> void:
 	record = _value
 	$LabelRecord.text = String(_value)
+
+func set_lives(_val) -> void:
+	lives = clamp(_val, 0, Globals.max_player_lives)
