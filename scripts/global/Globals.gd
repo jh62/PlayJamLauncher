@@ -11,7 +11,7 @@ const MAX_CHAR_SCANCODE := 91
 
 var debug_mode := false
 
-var max_player_lives := 1
+var max_player_lives := 3
 var play_mode = PLAY_MODE.SEAMLESS
 
 var current_player : PlayerScore
@@ -37,7 +37,9 @@ enum MENU_STATE {
 	INPUT_NAME,
 	GAME_LIST_EXPAND,
 	GAME_SELECTION,
-	GAME_EXECUTE
+	GAME_EXECUTE,
+	GAME_LOSE,
+	GAME_WIN
 }
 
 class ScoreSorter:

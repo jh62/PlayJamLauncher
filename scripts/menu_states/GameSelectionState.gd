@@ -16,8 +16,9 @@ func enter_state(meta := {}) -> void:
 	_selected_index = 0
 	
 	owner._sort_scores()
+	_get_selected_thumbnail()
 	
-func input(event) -> void: 
+func input(event) -> void:
 	if !(event is InputEventMouseButton) && !(event is InputEventKey):
 		return
 		
@@ -47,10 +48,15 @@ func input(event) -> void:
 	
 	_selected_index = clamp(_selected_index, 0, _item_list.get_item_count() - 1)
 
+	_get_selected_thumbnail()
+	
+func _get_selected_thumbnail() -> void:
 	var _meta = _item_list.get_item_metadata(_selected_index)
-	var _thumbnail_path = _meta[Global.GAME_METADATA.PATH] + "/thumb.png"
+	var _thumbnail_path = _meta[Global.GAME_METADATA.PATH] + "/cover.png"
 	var image := Image.new()
 	image.load(_thumbnail_path)
 	var t := ImageTexture.new()
 	t.create_from_image(image)
 	_thumbnail.texture = t
+	owner.n_ThumbnailTexture.visible = true
+	
