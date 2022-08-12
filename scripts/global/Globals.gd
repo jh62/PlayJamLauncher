@@ -1,7 +1,7 @@
 class_name Global extends Node
 
 # signals
-signal update_player_scores(score)
+signal update_player_scores
 signal player_lost_life
 
 const CONFIG_FILENAME := "config.cfg"
@@ -9,12 +9,19 @@ const CONFIG_FILENAME := "config.cfg"
 const MIN_CHAR_SCANCODE := 65
 const MAX_CHAR_SCANCODE := 91
 
+const SCORE_PRIZE := 500
+const MAX_PLAYERS := 250
+
+const PlayerColors := [PoolColorArray()]
+
 var debug_mode := false
 
 var max_player_lives := 3
 var play_mode = PLAY_MODE.SEAMLESS
 
 var current_player : PlayerScore
+
+var color_index := 0
 
 enum METADATA {
 	PLAYER_ID,
@@ -47,3 +54,12 @@ class ScoreSorter:
 		if a.record > b.record:
 			return true
 		return false
+
+func _ready():
+	for i in MAX_PLAYERS:
+		var color = Color(randf() * i, randf() * 1, randf() * 1)
+		PlayerColors.append(color)
+		
+func getNewPlayerColor() -> Color:
+	color_index = wrapf(color_index + 1, 0, MAX_PLAYERS)
+	return PlayerColors[color_index]

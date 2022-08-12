@@ -3,6 +3,9 @@ class_name PlayerScore extends GridContainer
 var lives := 0 setget set_lives
 var record := 0 setget set_record
 
+func _ready():
+	$LabelName.modulate = Globals.getNewPlayerColor()
+
 func get_player_id() -> int:
 	return get_index()
 	

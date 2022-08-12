@@ -20,6 +20,7 @@ onready var n_InputNameLabels := [
 
 onready var n_WarningDialog := $CanvasLayer/Control/PopUpControl/AcceptDialog
 onready var n_PlayerScoresList := $CanvasLayer/Control/ScoreBoardContainer/VBoxContainer2/VScrollBar/VBoxPlayerScore
+onready var n_LabelPlayerInfo := $CanvasLayer/Control/CenterContainer/LabelPlayerInfo
 
 onready var MenuStates := {
 	Global.MENU_STATE.INTRO: preload("res://scripts/menu_states/IntroState.gd").new(self),
@@ -27,6 +28,8 @@ onready var MenuStates := {
 	Global.MENU_STATE.GAME_LIST_EXPAND: preload("res://scripts/menu_states/GameListExpand.gd").new(self),
 	Global.MENU_STATE.GAME_SELECTION: preload("res://scripts/menu_states/GameSelectionState.gd").new(self),
 	Global.MENU_STATE.GAME_EXECUTE: preload("res://scripts/menu_states/GameExecute.gd").new(self),
+	Global.MENU_STATE.GAME_LOSE: preload("res://scripts/menu_states/GameLose.gd").new(self),
+	Global.MENU_STATE.GAME_WIN: preload("res://scripts/menu_states/GameWin.gd").new(self),
 }
 
 onready var current_state = MenuStates.get(Global.MENU_STATE.INTRO)
@@ -34,13 +37,15 @@ onready var current_state = MenuStates.get(Global.MENU_STATE.INTRO)
 var config := ConfigFile.new()
 
 func _ready():
+	randomize()
+	
 	var _err = config.load(Globals.CONFIG_FILENAME)
 	
 	if _err != OK:
 		save_settings()
 	else:
 		Globals.play_mode = config.get_value("Globals","play_mode")
-		Globals.max_player_lives = config.get_value("Globals","player_lives")			
+		Globals.max_player_lives = config.get_value("Globals","player_lives")
 		print_debug("config loaded!")
 		
 	var _dir_list := _create_game_dir()
@@ -154,12 +159,13 @@ func update_player_info() -> void:
 	n_LabelPlayerName.text = Globals.current_player.get_name()
 	n_LabelPlayerLives.text = "VIDAS: {0}".format({0:String(Globals.current_player.lives)})
 	
-func _on_update_player_scores(score) -> void:
-	Globals.current_player.record += score
+func _on_update_player_scores() -> void:
+	Globals.current_player.record += 500
+	update_player_info()
 
 func _on_player_lost_life() -> void:
 	Globals.current_player.lives -= 1
-	update_player_info()
+	update_player_info()	
 
 func _sort_scores() -> void:
 	var _children = n_PlayerScoresList.get_children()

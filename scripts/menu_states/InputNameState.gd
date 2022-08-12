@@ -1,5 +1,7 @@
 extends MenuState
 
+const PlayerScore := preload("res://scenes/PlayerScore/PlayerScore.tscn")
+
 var _selected_index := 0
 var _input_name_idx := 0
 var _input_letter := 0
@@ -16,10 +18,9 @@ func enter_state(meta := {}) -> void:
 	_input_letter = 0
 	
 	owner.n_AnimationPlayer.play("input_name")
-	print_debug("name")
 
 func exit_state() -> void:
-	var _new_player = preload("res://scenes/PlayerScore/PlayerScore.tscn").instance()
+	var _new_player = PlayerScore.instance()
 	var _name = owner.n_InputNameLabels[0].get_text() + owner.n_InputNameLabels[1].get_text() + owner.n_InputNameLabels[2].get_text()
 	
 	_new_player.set_name(_name)
