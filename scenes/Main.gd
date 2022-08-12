@@ -47,6 +47,8 @@ func _ready():
 		Globals.play_mode = config.get_value("Globals","play_mode")
 		Globals.max_player_lives = config.get_value("Globals","player_lives")
 		print_debug("config loaded!")
+	
+	$CanvasLayer/Control/LabelMode.visible = Globals.debug_mode
 		
 	var _dir_list := _create_game_dir()
 	_populate_games(_dir_list)

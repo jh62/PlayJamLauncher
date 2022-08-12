@@ -11,6 +11,8 @@ func get_type() -> int:
 	return Globals.MENU_STATE.GAME_SELECTION
 
 func enter_state(meta := {}) -> void:
+	owner.n_AnimationPlayer.play("game_list_expanded")
+	
 	_item_list = owner.n_ItemList
 	_thumbnail = owner.n_ThumbnailTexture
 	_selected_index = 0

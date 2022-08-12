@@ -32,7 +32,7 @@ func process(delta) -> void:
 	
 	if Globals.debug_mode:
 		_exit_code = OS.execute(_file, [], true)
-		_exit_code = EXIT_CODES.WIN
+#		_exit_code = EXIT_CODES.WIN
 		print_debug("exit code: " + str(_exit_code))
 	else:
 		_exit_code = OS.execute(_file, [], true)
